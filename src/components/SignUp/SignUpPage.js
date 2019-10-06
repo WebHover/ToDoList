@@ -8,7 +8,6 @@ import { withFirebase } from '../Firebase';
 class SignUpPage extends Component {
     state = {}
     render() {
-        console.log(process.env.REACT_APP_API_KEY)
         return (
             <div className='loginPage'>
                 <div className="loginBox">
@@ -36,7 +35,7 @@ class SignUpFormBase extends Component {
         const { username, email, passwordOne } = this.state;
         this.props.firebase
             .doCreateUserWithEmailAndPassword(email, passwordOne)
-            .then(authUser => {
+            .then(() => {
                 this.setState({ ...INITIAL_STATE });
                 this.props.history.push(ROUTES.HOME);
             })
@@ -44,7 +43,8 @@ class SignUpFormBase extends Component {
                 this.setState({ error });
             });
         event.preventDefault();
-    }
+    };
+
 
     onChange = event => {
         this.setState({ [event.target.name]: event.target.value });
@@ -99,14 +99,14 @@ class SignUpFormBase extends Component {
                     </button>
                     {error && <p>{error.message}</p>}
                 </form>
-                <SignUpLink />
+                <SignInLink />
             </>
         );
     }
 }
-const SignUpLink = () => (
+const SignInLink = () => (
     <p>
-        Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+        Don't have an account? <Link to={ROUTES.SIGN_IN}>Sign In</Link>
     </p>
 );
 
@@ -117,4 +117,4 @@ const SignUpForm = compose(
 
 export default SignUpPage;
 
-export { SignUpForm, SignUpLink };
+export { SignUpForm, SignInLink };
