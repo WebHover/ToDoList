@@ -1,10 +1,9 @@
 @import '../constans/variables.scss';
 
 body {
-    background-color: $primary-color; 
-    
-        .test {
-        color: #fff;
-    }
+    background-color: $primary-color;
 }
 
+* {
+    box-sizing: border-box;
+}
